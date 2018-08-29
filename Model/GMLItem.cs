@@ -17,7 +17,8 @@ namespace GMLParser.Model
 
         private void ParseTag(IEnumerable<string> tag)
         {
-
+            var chars = tag.First().SkipWhile(c => c == ' ' || c == '<').TakeWhile(c => char.IsLetter(c));
+            NodeName = new string(chars.ToArray());
         }
     }
 }

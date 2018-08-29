@@ -29,25 +29,26 @@ namespace GMLParser.Model
 
             for(int i = 0; i<rows.Length; i++)
             {
-                if(rows[i].StartsWith('<'))
+                if(rows[i].StartsWith("</"))
                 {
-                    if(rows[i].StartsWith("</"))
-                    {
-                        root = levels.Pop();
-                        continue;
-                    }
-                    
-                    if(!rows[i].EndsWith('>'))
-                        tag = rows.TakeWhile(str => !str.EndsWith(">")).ToList();
+                    root = levels.Pop();
+                    continue;
+                }
+
+                if(rows[i].StartsWith('<'))
+                {   
+                    if(rows[i].EndsWith('>'))
+                        tag.Add(rows[i]); 
                     else
-                        tag.Add(rows[i]);
-                    
-                    levels.Push(new Node(tag));
-                    
-                    if(levels.Count > 1)
+                        tag = rows.TakeWhile(str => !str.EndsWith(">")).ToList();  
+
+                    if(levels.Count >= 1)
                     {
                         levels.Peek().Children.Add(new Node(tag));
                     }
+
+                    if(!tag.Last().EndsWith("/>"))
+                        levels.Push(new Node(tag));
                 }
 
                 tag.Clear();
