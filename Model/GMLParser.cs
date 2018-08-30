@@ -7,14 +7,48 @@ namespace GMLParser.Model
 {
     public class Parser
     {
+        private GMLCodeGenerator _generator;
         public Parser()
-        {}
+        {
+            _generator = new GMLCodeGenerator();
+        }
 
-        public string ParseGML(string code)
+        public string GenerateFileHeader(string name)
         {
             StringBuilder sb = new StringBuilder();
 
+            sb.AppendLine("#include <stdio.h>\n");
+            sb.Append($"void Build{name}(void);");
+
+            return sb.ToString();
+        }
+        public string GetBaseIncludes(string fileName)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("#include <stdio.h>");
+            sb.AppendLine("#include <gtk/gtk.h>");
+            sb.AppendLine($"#include \"{fileName}.h\"");
+
+            sb.Append("\n\n\n");
+
+            return sb.ToString();
+        }
+
+        public string ParseGML(string code, string fileName)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(GetBaseIncludes(fileName));
+
+            sb.Append($"void Build{fileName}");
+            sb.Append("(void)\n{\n");
+
             Node root = BuildNodeTree(code);
+
+            sb.Append(root.GetCCode());
+
+            sb.Append("\n}");
 
             return sb.ToString();
         }
@@ -40,7 +74,10 @@ namespace GMLParser.Model
                     if(rows[i].EndsWith('>'))
                         tag.Add(rows[i]); 
                     else
-                        tag = rows.TakeWhile(str => !str.EndsWith(">")).ToList();  
+                    {
+                        tag = rows.Skip(i).TakeWhile(str => !str.EndsWith(">")).ToList();  
+                        tag.Add(rows[Array.IndexOf(rows, tag.Last()) + 1]);
+                    }
 
                     if(levels.Count >= 1)
                     {
