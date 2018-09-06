@@ -2,6 +2,8 @@ using System;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
+using System.Text;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace GMLParser.Model
@@ -22,6 +24,8 @@ namespace GMLParser.Model
 
         public void ReadXml(XmlReader reader)
         {
+            reader.Read();
+
             XmlSerializer serializer = new XmlSerializer(typeof(string), new XmlRootAttribute("Setter"));
             SetterRepresentation = serializer.Deserialize(reader) as string;
 
@@ -56,6 +60,34 @@ namespace GMLParser.Model
         public List<Property> ObjectProperties { get; }
             = new List<Property>();
 
+        public string CreationString
+        {
+            get
+            {
+                Property creation = ObjectProperties
+                                 .First(prop=>string.Compare("_Creation", prop.Name) == 0);
+
+                string baseStr = creation.SetterRepresentation;
+
+                string[] paramTypes = creation.GetterRepresentation.Split(';');
+                
+                if(paramTypes.All(param => ObjectProperties.Any(prop=>string.Compare(param, prop.Name) == 0)))
+                {}
+                else
+                {
+                    baseStr = string.Format(baseStr, "GTK_WINDOW_TOPLEVEL");
+                }
+
+                StringBuilder sb = new StringBuilder();
+
+                sb.Append($"{TypeName}*");
+                sb.Append(" {0}");
+                sb.Append(baseStr);
+
+                return sb.ToString();
+            }
+        }
+
         public GTKObjectRepresentation()
         {
             
@@ -68,7 +100,12 @@ namespace GMLParser.Model
 
         public void ReadXml(XmlReader reader)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Property>), new XmlRootAttribute("ObjectProperties"));
+            reader.Read();
+
+            XmlSerializer serializer = new XmlSerializer(typeof(string), new XmlRootAttribute("TypeName"));
+            TypeName = serializer.Deserialize(reader) as string;
+
+            serializer = new XmlSerializer(typeof(List<Property>), new XmlRootAttribute("ObjectProperties"));
             ObjectProperties.AddRange(serializer.Deserialize(reader) as List<Property>);
         }
 
@@ -77,7 +114,10 @@ namespace GMLParser.Model
             XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
             ns.Add("","");
 
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Property>), new XmlRootAttribute("ObjectProperties"));
+            XmlSerializer serializer = new XmlSerializer(typeof(string), new XmlRootAttribute("TypeName"));
+            serializer.Serialize(writer, TypeName);
+
+            serializer = new XmlSerializer(typeof(List<Property>), new XmlRootAttribute("ObjectProperties"));
             serializer.Serialize(writer, ObjectProperties, ns);
         }
     }
@@ -112,6 +152,8 @@ namespace GMLParser.Model
 
         public void ReadXml(XmlReader reader)
         {
+            reader.Read();
+
             XmlSerializer serializer = new XmlSerializer(typeof(List<GTKObjectRepresentation>), new XmlRootAttribute("Objects"));
             ObjectType.AddRange(serializer.Deserialize(reader) as List<GTKObjectRepresentation>);
         }

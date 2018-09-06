@@ -1,0 +1,19 @@
+<GMLRules>
+<Objects>
+<GTKObjectRepresentation>
+<TypeName>GtkWindow</TypeName>
+<ObjectProperties>
+<Property>
+<Setter> = gtk_window_new ({0});</Setter>
+<Getter>WindowType</Getter>
+<PropName>_Creation</PropName>
+</Property>
+<Property>
+<Setter>Setter</Setter>
+<Getter>Getter</Getter>
+<PropName>Name</PropName>
+</Property>
+</ObjectProperties>
+</GTKObjectRepresentation>
+</Objects>
+</GMLRules>

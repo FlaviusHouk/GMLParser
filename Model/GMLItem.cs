@@ -39,14 +39,5 @@ namespace GMLParser.Model
                 ObjectProperties.Add(parts[0], parts[1].Trim('"'));
             }
         }
-
-        public string GetCCode()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            
-
-            return sb.ToString();
-        }
     }
 }

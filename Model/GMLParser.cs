@@ -46,7 +46,7 @@ namespace GMLParser.Model
 
             Node root = BuildNodeTree(code);
 
-            sb.Append(root.GetCCode());
+            sb.Append(_generator.GenerateCode(root));
 
             sb.Append("\n}");
 
