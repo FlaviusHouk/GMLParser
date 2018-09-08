@@ -8,11 +8,17 @@ using System.Collections.Generic;
 
 namespace GMLParser.Model
 {
-    public class Property : IXmlSerializable
+    [XmlRoot("Property")]
+    public class Property// : IXmlSerializable
     {
-        public string Name { get; private set; }
-        public string SetterRepresentation { get; private set; }
-        public string GetterRepresentation { get; private set; }
+        [XmlElement("PropName")]
+        public string Name { get; set; }
+        
+        [XmlElement("Setter")]
+        public string SetterRepresentation { get; set; }
+
+        [XmlElement("Getter")]
+        public string GetterRepresentation { get; set; }
         public XmlSchema GetSchema()
         {
             return null;
@@ -24,7 +30,7 @@ namespace GMLParser.Model
 
         public void ReadXml(XmlReader reader)
         {
-            reader.Read();
+            /*reader.Read();
 
             XmlSerializer serializer = new XmlSerializer(typeof(string), new XmlRootAttribute("Setter"));
             SetterRepresentation = serializer.Deserialize(reader) as string;
@@ -33,7 +39,7 @@ namespace GMLParser.Model
             GetterRepresentation = serializer.Deserialize(reader) as string;
 
             serializer = new XmlSerializer(typeof(string), new XmlRootAttribute("PropName"));
-            Name = serializer.Deserialize(reader) as string;
+            Name = serializer.Deserialize(reader) as string;*/
         }
 
         public void WriteXml(XmlWriter writer)
@@ -56,7 +62,7 @@ namespace GMLParser.Model
     {
         public string TypeName { get; private set; }
 
-        [XmlArray("ObjectProperties"), XmlArrayItem(typeof(Property))]
+        [XmlArray("ObjectProperties"), XmlArrayItem("Property",typeof(Property))]
         public List<Property> ObjectProperties { get; }
             = new List<Property>();
 
@@ -106,7 +112,9 @@ namespace GMLParser.Model
             TypeName = serializer.Deserialize(reader) as string;
 
             serializer = new XmlSerializer(typeof(List<Property>), new XmlRootAttribute("ObjectProperties"));
-            ObjectProperties.AddRange(serializer.Deserialize(reader) as List<Property>);
+            //reader.ReadToDescendant("ObjectProperties");
+            var props = serializer.Deserialize(reader) as List<Property>;
+            ObjectProperties.AddRange(props);
         }
 
         public void WriteXml(XmlWriter writer)
@@ -128,7 +136,7 @@ namespace GMLParser.Model
         {
             GMLRules toRet = null;
             
-            using (System.IO.FileStream fs = System.IO.File.Open("GMLRules.xml", System.IO.FileMode.Open))
+            using (System.IO.FileStream fs = System.IO.File.Open("GMLRules.xml", System.IO.FileMode.Open, System.IO.FileAccess.Read))
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(GMLRules));
                 toRet = serializer.Deserialize(fs) as GMLRules;

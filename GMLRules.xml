@@ -9,6 +9,11 @@
 <PropName>_Creation</PropName>
 </Property>
 <Property>
+<Setter>gtk_window_set_title ("{0}");</Setter>
+<Getter>gtk_window_get_title();</Getter>
+<PropName>Title</PropName>
+</Property>
+<Property>
 <Setter>Setter</Setter>
 <Getter>Getter</Getter>
 <PropName>Name</PropName>

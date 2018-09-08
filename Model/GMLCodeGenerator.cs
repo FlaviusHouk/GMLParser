@@ -14,6 +14,7 @@ namespace GMLParser.Model
         {
             _rules = GMLRules.GetRules();
             _counters = new Dictionary<string, int>();
+            _elementsToShow = new Stack<string>();
         }
 
 
@@ -69,7 +70,7 @@ namespace GMLParser.Model
             {
                 Property prop = obj.ObjectProperties.First(p=>string.Compare(p.Name, attr.Key) == 0);
 
-                sb.AppendLine($"{objName}->{string.Format(prop.SetterRepresentation, attr.Key)}");
+                sb.AppendLine($"{objName}->{string.Format(prop.SetterRepresentation, attr.Value)}");
             }
 
             return sb.ToString();
