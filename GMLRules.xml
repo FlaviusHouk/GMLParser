@@ -2,6 +2,7 @@
 <Objects>
 <GTKObjectRepresentation>
 <TypeName>GtkWindow</TypeName>
+<BaseType>GtkBin</BaseName>
 <ObjectProperties>
 <Property>
 <Setter> = gtk_window_new ({0});</Setter>
@@ -9,14 +10,54 @@
 <PropName>_Creation</PropName>
 </Property>
 <Property>
-<Setter>gtk_window_set_title ("{0}");</Setter>
-<Getter>gtk_window_get_title();</Getter>
+<Setter>gtk_window_set_title ({0}, "{1}");</Setter>
+<Getter>gtk_window_get_title({0});</Getter>
 <PropName>Title</PropName>
 </Property>
 <Property>
-<Setter>Setter</Setter>
-<Getter>Getter</Getter>
-<PropName>Name</PropName>
+<Setter>gtk_window_set_resizable ({0}, {1});</Setter>
+<Getter>gtk_window_get_resizable({0});</Getter>
+<PropName>IsResizable</PropName>
+</Property>
+<Property>
+<Setter>gtk_window_set_modal ({0}, {1});</Setter>
+<Getter>gtk_window_get_modal({0});</Getter>
+<PropName>IsModal</PropName>
+</Property>
+<Property>
+<Setter>gtk_window_set_geometry_hints ({0}, {1});</Setter>
+<Getter></Getter>
+<PropName>Hints</PropName>
+</Property>
+<Property>
+<Setter>gtk_window_set_gravity ({0}, {1});</Setter>
+<Getter>gtk_window_get_gravity ({0});</Getter>
+<PropName>Gravity</PropName>
+</Property>
+<Property>
+<Setter>gtk_window_set_destroy_with_parent ({0}, {1});</Setter>
+<Getter>gtk_window_get_destroy_with_parent ({0});</Getter>
+<PropName>IsDestroyedWithParent</PropName>
+</Property>
+<Property>
+<Setter>gtk_window_set_decorated ({0}, {1});</Setter>
+<Getter>gtk_window_get_decorated ({0});</Getter>
+<PropName>IsDecorated</PropName>
+</Property>
+<Property>
+<Setter>gtk_window_set_deletable ({0}, {1});</Setter>
+<Getter></Getter>
+<PropName>IsCloseButtonShown</PropName>
+</Property>
+<Property>
+<Setter>gtk_window_set_skip_taskbar_hint ({0}, {1});</Setter>
+<Getter></Getter>
+<PropName>IsTaskbarHintSkipped</PropName>
+</Property>
+<Property>
+<Setter>gtk_window_set_opacity ({0}, {1});</Setter>
+<Getter>gtk_window_set_opacity ({0});</Getter>
+<PropName>IsTaskbarHintSkipped</PropName>
 </Property>
 </ObjectProperties>
 </GTKObjectRepresentation>

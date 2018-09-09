@@ -61,6 +61,7 @@ namespace GMLParser.Model
     public class GTKObjectRepresentation : IXmlSerializable
     {
         public string TypeName { get; private set; }
+        public string BaseType { get; private set; }
 
         [XmlArray("ObjectProperties"), XmlArrayItem("Property",typeof(Property))]
         public List<Property> ObjectProperties { get; }
@@ -111,8 +112,10 @@ namespace GMLParser.Model
             XmlSerializer serializer = new XmlSerializer(typeof(string), new XmlRootAttribute("TypeName"));
             TypeName = serializer.Deserialize(reader) as string;
 
+            serializer = new XmlSerializer(typeof(string), new XmlRootAttribute("BaseType"));
+            BaseType = serializer.Deserialize(reader) as string;
+
             serializer = new XmlSerializer(typeof(List<Property>), new XmlRootAttribute("ObjectProperties"));
-            //reader.ReadToDescendant("ObjectProperties");
             var props = serializer.Deserialize(reader) as List<Property>;
             ObjectProperties.AddRange(props);
         }
@@ -123,6 +126,9 @@ namespace GMLParser.Model
             ns.Add("","");
 
             XmlSerializer serializer = new XmlSerializer(typeof(string), new XmlRootAttribute("TypeName"));
+            serializer.Serialize(writer, TypeName);
+
+            serializer = new XmlSerializer(typeof(string), new XmlRootAttribute("BaseType"));
             serializer.Serialize(writer, TypeName);
 
             serializer = new XmlSerializer(typeof(List<Property>), new XmlRootAttribute("ObjectProperties"));

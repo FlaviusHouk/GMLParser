@@ -68,12 +68,38 @@ namespace GMLParser.Model
 
             foreach(var attr in node.ObjectProperties)
             {
-                Property prop = obj.ObjectProperties.First(p=>string.Compare(p.Name, attr.Key) == 0);
+                string setter = FindSetter(obj, attr.Key);
 
-                sb.AppendLine($"{objName}->{string.Format(prop.SetterRepresentation, attr.Value)}");
+                sb.AppendLine($"{objName}->{string.Format(setter, attr.Value)}");
             }
 
             return sb.ToString();
+        }
+
+        private string FindSetter(GTKObjectRepresentation obj, string propName)
+        {
+            string toRet = null;
+
+            GTKObjectRepresentation curr = obj;
+            while(curr != null)
+            {
+                if(curr.ObjectProperties.Any(p=>string.Compare(p.Name, propName) == 0))
+                {
+                    toRet = curr.ObjectProperties.First(p=>string.Compare(p.Name, propName) == 0).SetterRepresentation;
+                    break;
+                }
+                else
+                {
+                    if(string.IsNullOrEmpty(curr.BaseType))
+                    {
+                        throw new Exception("There is no such type in collection.");
+                    }
+
+                    curr = _rules.ObjectType.First(o=>string.Compare(o.TypeName, curr.BaseType) == 0);
+                }
+            }
+
+            return toRet;
         }
 
         private string ShowVisualElements()
