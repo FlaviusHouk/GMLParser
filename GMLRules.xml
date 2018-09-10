@@ -1,6 +1,68 @@
 <GMLRules>
 <Objects>
 <GTKObjectRepresentation>
+<TypeName>GtkWidget</TypeName>
+<BaseType></BaseType>
+<ObjectProperties>
+<Property>
+<Setter> = gtk_widget_new ({0});</Setter>
+<Getter>WidgetType, ...</Getter>
+<PropName>_Creation</PropName>
+</Property>
+<Property>
+<Setter>gtk_widget_set_name (GTK_WIDGET({0}), "{1}");</Setter>
+<Getter>gtk_widget_get_name (GTK_WIDGET({0}));</Getter>
+<PropName>Name</PropName>
+</Property>
+<Property>
+<Setter>gtk_widget_set_sensitive (GTK_WIDGET({0}), {1});</Setter>
+<Getter>gtk_widget_get_sensitive (GTK_WIDGET({0}));</Getter>
+<PropName>IsSensitive</PropName>
+</Property>
+<Property>
+<Setter>gtk_widget_set_direction (GTK_WIDGET({0}), {1});</Setter>
+<Getter>gtk_widget_get_direction (GTK_WIDGET({0}));</Getter>
+<PropName>Direction</PropName>
+</Property>
+<Property>
+<Setter>gtk_widget_modify_fg (GTK_WIDGET({0}), {1}, {2});</Setter>
+<Getter></Getter>
+<PropName>Foreground</PropName>
+</Property>
+<Property>
+<Setter>gtk_widget_modify_bg (GTK_WIDGET({0}), {1}, {2});</Setter>
+<Getter></Getter>
+<PropName>Background</PropName>
+</Property>
+<Property>
+<Setter>gtk_widget_modify_text (GTK_WIDGET({0}), {1}, {2});</Setter>
+<Getter></Getter>
+<PropName>TextColor</PropName>
+</Property>
+<Property>
+<Setter>gtk_widget_set_visible (GTK_WIDGET({0}), {1});</Setter>
+<Getter>gtk_widget_get_visible (GTK_WIDGET({0}));</Getter>
+<PropName>IsVisible</PropName>
+</Property>
+</ObjectProperties>
+</GTKObjectRepresentation>
+<GTKObjectRepresentation>
+<TypeName>GtkContainer</TypeName>
+<BaseType>GtkWidget</BaseType>
+<ObjectProperties>
+<Property>
+<Setter>gtk_container_add (GTK_CONTAINER({0}), GTK_WIDGET({1}));</Setter>
+<Getter>Container, Widget</Getter>
+<PropName>_Add</PropName>
+</Property>
+<Property>
+<Setter>gtk_container_set_resize_mode (GTK_CONTAINER({0}), {1});</Setter>
+<Getter>gtk_container_get_resize_mode (GTK_CONTAINER({0}));</Getter>
+<PropName>ResizeMode</PropName>
+</Property>
+</ObjectProperties>
+</GTKObjectRepresentation>
+<GTKObjectRepresentation>
 <TypeName>GtkBin</TypeName>
 <BaseType>GtkContainer</BaseType>
 <ObjectProperties/>
@@ -63,6 +125,37 @@
 <Setter>gtk_window_set_opacity ({0}, {1});</Setter>
 <Getter>gtk_window_set_opacity ({0});</Getter>
 <PropName>IsTaskbarHintSkipped</PropName>
+</Property>
+</ObjectProperties>
+</GTKObjectRepresentation>
+<GTKObjectRepresentation>
+<TypeName>GtkEntry</TypeName>
+<BaseType>GtkWidget</BaseType>
+<ObjectProperties>
+<Property>
+<Setter> = gtk_entry_new ();</Setter>
+<Getter></Getter>
+<PropName>_Creation</PropName>
+</Property>
+<Property>
+<Setter>gtk_entry_set_text (GTK_ENTRY({0}), "{1}");</Setter>
+<Getter>gtk_entry_get_text (GTK_ENTRY({0}));</Getter>
+<PropName>Text</PropName>
+</Property>
+<Property>
+<Setter>gtk_entry_set_visibility (GTK_ENTRY({0}), {1});</Setter>
+<Getter>gtk_entry_get_visibility (GTK_ENTRY({0}));</Getter>
+<PropName>IsCharsVisible</PropName>
+</Property>
+<Property>
+<Setter>gtk_entry_set_invisible_char (GTK_ENTRY({0}), '{1}');</Setter>
+<Getter>gtk_entry_get_invisible_char (GTK_ENTRY({0}));</Getter>
+<PropName>InvisibleChar</PropName>
+</Property>
+<Property>
+<Setter>gtk_entry_set_max_length (GTK_ENTRY({0}), {1});</Setter>
+<Getter>gtk_entry_get_max_length (GTK_ENTRY({0}));</Getter>
+<PropName>MaxLength</PropName>
 </Property>
 </ObjectProperties>
 </GTKObjectRepresentation>
