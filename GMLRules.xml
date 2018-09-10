@@ -2,7 +2,7 @@
 <Objects>
 <GTKObjectRepresentation>
 <TypeName>GtkWindow</TypeName>
-<BaseType>GtkBin</BaseName>
+<BaseType>GtkBin</BaseType>
 <ObjectProperties>
 <Property>
 <Setter> = gtk_window_new ({0});</Setter>

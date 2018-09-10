@@ -17,12 +17,21 @@ namespace GMLParser.Model
             _elementsToShow = new Stack<string>();
         }
 
-
-        private bool _firstIn = true;
         public string GenerateCode(Node root)
         {
-            _firstIn = false;
+            StringBuilder sb = new StringBuilder();
 
+            sb.Append(GenerateCodePrivate(root));
+
+            _counters.Clear();
+
+            sb.Append(ShowVisualElements());
+
+            return sb.ToString();
+        }
+
+        public string GenerateCodePrivate(Node root)
+        {
             StringBuilder sb = new StringBuilder();
             
             sb.Append(AnalyzeNode(root));
@@ -31,14 +40,6 @@ namespace GMLParser.Model
             {
                 sb.Append(GenerateCode(node));
             }
-
-            if(_firstIn)
-            {
-                _counters.Clear();
-                ShowVisualElements();
-            }
-
-            _firstIn = true;
 
             return sb.ToString();
         }
@@ -70,7 +71,7 @@ namespace GMLParser.Model
             {
                 string setter = FindSetter(obj, attr.Key);
 
-                sb.AppendLine($"{objName}->{string.Format(setter, attr.Value)}");
+                sb.AppendLine($"{objName}->{string.Format(setter, objName, attr.Value)}");
             }
 
             return sb.ToString();

@@ -61,6 +61,7 @@ namespace GMLParser.Model
     public class GTKObjectRepresentation : IXmlSerializable
     {
         public string TypeName { get; private set; }
+        
         public string BaseType { get; private set; }
 
         [XmlArray("ObjectProperties"), XmlArrayItem("Property",typeof(Property))]
