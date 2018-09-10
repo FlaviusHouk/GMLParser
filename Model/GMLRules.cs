@@ -19,49 +19,16 @@ namespace GMLParser.Model
 
         [XmlElement("Getter")]
         public string GetterRepresentation { get; set; }
-        public XmlSchema GetSchema()
-        {
-            return null;
-        }
 
         public Property()
         {
-        }
-
-        public void ReadXml(XmlReader reader)
-        {
-            /*reader.Read();
-
-            XmlSerializer serializer = new XmlSerializer(typeof(string), new XmlRootAttribute("Setter"));
-            SetterRepresentation = serializer.Deserialize(reader) as string;
-
-            serializer = new XmlSerializer(typeof(string), new XmlRootAttribute("Getter"));
-            GetterRepresentation = serializer.Deserialize(reader) as string;
-
-            serializer = new XmlSerializer(typeof(string), new XmlRootAttribute("PropName"));
-            Name = serializer.Deserialize(reader) as string;*/
-        }
-
-        public void WriteXml(XmlWriter writer)
-        {
-            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
-            ns.Add("","");
-
-            XmlSerializer serializer = new XmlSerializer(typeof(string), new XmlRootAttribute("Setter"));
-            serializer.Serialize(writer, SetterRepresentation, ns);
-
-            serializer = new XmlSerializer(typeof(string), new XmlRootAttribute("Getter"));
-            serializer.Serialize(writer, GetterRepresentation, ns);
-
-            serializer = new XmlSerializer(typeof(string), new XmlRootAttribute("PropName"));
-            serializer.Serialize(writer, Name, ns);
         }
     }
 
     public class GTKObjectRepresentation : IXmlSerializable
     {
         public string TypeName { get; private set; }
-        
+
         public string BaseType { get; private set; }
 
         [XmlArray("ObjectProperties"), XmlArrayItem("Property",typeof(Property))]
@@ -119,6 +86,8 @@ namespace GMLParser.Model
             serializer = new XmlSerializer(typeof(List<Property>), new XmlRootAttribute("ObjectProperties"));
             var props = serializer.Deserialize(reader) as List<Property>;
             ObjectProperties.AddRange(props);
+
+            reader.Read();
         }
 
         public void WriteXml(XmlWriter writer)

@@ -1,6 +1,11 @@
 <GMLRules>
 <Objects>
 <GTKObjectRepresentation>
+<TypeName>GtkBin</TypeName>
+<BaseType>GtkContainer</BaseType>
+<ObjectProperties/>
+</GTKObjectRepresentation>
+<GTKObjectRepresentation>
 <TypeName>GtkWindow</TypeName>
 <BaseType>GtkBin</BaseType>
 <ObjectProperties>
