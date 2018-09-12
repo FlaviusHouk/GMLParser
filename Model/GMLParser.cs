@@ -79,13 +79,15 @@ namespace GMLParser.Model
                         tag.Add(rows[Array.IndexOf(rows, tag.Last()) + 1]);
                     }
 
+                    Node node = new Node(tag);
+
                     if(levels.Count >= 1)
                     {
-                        levels.Peek().Children.Add(new Node(tag));
+                        levels.Peek().Children.Add(node);
                     }
 
                     if(!tag.Last().EndsWith("/>"))
-                        levels.Push(new Node(tag));
+                        levels.Push(node);
                 }
 
                 tag.Clear();

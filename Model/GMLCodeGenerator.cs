@@ -35,6 +35,7 @@ namespace GMLParser.Model
             StringBuilder sb = new StringBuilder();
             
             sb.Append(AnalyzeNode(root, parent));
+            sb.AppendLine();
 
             foreach(Node node in root.Children)
             {
@@ -65,13 +66,13 @@ namespace GMLParser.Model
             node.CodeName = objName;
             _elementsToShow.Push(objName);
 
-            sb.AppendLine(string.Format(obj.CreationString, objName));
+            sb.AppendLine(CreateElement(node));
 
             foreach(var attr in node.ObjectProperties)
             {
                 string setter = FindProperty(obj, attr.Key).SetterRepresentation;
 
-                sb.AppendLine($"{objName}->{string.Format(setter, objName, attr.Value)}");
+                sb.AppendLine($"{string.Format(setter, objName, attr.Value)}");
             }
 
             if(parent != null)
@@ -103,8 +104,9 @@ namespace GMLParser.Model
                     }
                     else
                     {
-                        sb.AppendFormat(add.SetterRepresentation, parent.CodeName);
+                        sb.AppendFormat(add.SetterRepresentation, parent.CodeName, node.CodeName);
                     }
+                    sb.AppendLine();
                 }
                 else
                 {
@@ -181,6 +183,26 @@ namespace GMLParser.Model
             }
 
             return sb.ToString();
+        }
+
+        private string CreateElement(Node node)
+        {
+            GTKObjectRepresentation obj = GetTypeRepresentation(node.NodeName);
+            Property creationProp = FindProperty(obj, "_Creation");
+
+            var packArgs = creationProp.GetterRepresentation
+                                       .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                                       .Select(par => par.Trim());
+
+            List<string> values = new List<string>(packArgs.Count());
+            values.Add(node.CodeName);
+            foreach (string prop in packArgs)
+            {
+                values.Add(node.ObjectProperties[prop]);
+                node.ObjectProperties.Remove(prop);
+            }
+
+            return string.Format(obj.CreationString, values.ToArray());
         }
     }
 }

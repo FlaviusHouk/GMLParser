@@ -5,7 +5,7 @@
 <BaseType></BaseType>
 <ObjectProperties>
 <Property>
-<Setter> = gtk_widget_new ({0});</Setter>
+<Setter> = gtk_widget_new ({1});</Setter>
 <Getter>WidgetType, ...</Getter>
 <PropName>_Creation</PropName>
 </Property>
@@ -72,7 +72,7 @@
 <BaseType>GtkBin</BaseType>
 <ObjectProperties>
 <Property>
-<Setter> = gtk_window_new ({0});</Setter>
+<Setter> = gtk_window_new ({1});</Setter>
 <Getter>WindowType</Getter>
 <PropName>_Creation</PropName>
 </Property>
@@ -168,7 +168,18 @@
 <Getter>Container, Widget, Expand, Fill, Padding</Getter>
 <PropName>_Add</PropName>
 </Property>
-<ObjectProperties/>
+</ObjectProperties>
+</GTKObjectRepresentation>
+<GTKObjectRepresentation>
+<TypeName>GtkVBox</TypeName>
+<BaseType>GtkBox</BaseType>
+<ObjectProperties>
+<Property>
+<Setter> = gtk_vbox_new ({1}, {2});</Setter>
+<Getter>Homogeneous, Spacing</Getter>
+<PropName>_Creation</PropName>
+</Property>
+</ObjectProperties>
 </GTKObjectRepresentation>
 </Objects>
 </GMLRules>

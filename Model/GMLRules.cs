@@ -44,15 +44,6 @@ namespace GMLParser.Model
 
                 string baseStr = creation.SetterRepresentation;
 
-                string[] paramTypes = creation.GetterRepresentation.Split(';');
-                
-                if(paramTypes.All(param => ObjectProperties.Any(prop=>string.Compare(param, prop.Name) == 0)))
-                {}
-                else
-                {
-                    baseStr = string.Format(baseStr, "GTK_WINDOW_TOPLEVEL");
-                }
-
                 StringBuilder sb = new StringBuilder();
 
                 sb.Append($"{TypeName}*");
