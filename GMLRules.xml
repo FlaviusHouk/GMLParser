@@ -159,5 +159,16 @@
 </Property>
 </ObjectProperties>
 </GTKObjectRepresentation>
+<GTKObjectRepresentation>
+<TypeName>GtkBox</TypeName>
+<BaseType>GtkContainer</BaseType>
+<ObjectProperties>
+<Property>
+<Setter>gtk_box_pack_start (GTK_BOX({0}), GTK_WIDGET({1}), {2}, {3}, {4});</Setter>
+<Getter>Container, Widget, Expand, Fill, Padding</Getter>
+<PropName>_Add</PropName>
+</Property>
+<ObjectProperties/>
+</GTKObjectRepresentation>
 </Objects>
 </GMLRules>

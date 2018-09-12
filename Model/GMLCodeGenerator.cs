@@ -30,26 +30,25 @@ namespace GMLParser.Model
             return sb.ToString();
         }
 
-        public string GenerateCodePrivate(Node root)
+        public string GenerateCodePrivate(Node root, Node parent = null)
         {
             StringBuilder sb = new StringBuilder();
             
-            sb.Append(AnalyzeNode(root));
+            sb.Append(AnalyzeNode(root, parent));
 
             foreach(Node node in root.Children)
             {
-                sb.Append(GenerateCode(node));
+                sb.Append(GenerateCodePrivate(node, root));
             }
 
             return sb.ToString();
         }
 
-        private string AnalyzeNode(Node node)
+        private string AnalyzeNode(Node node, Node parent = null)
         {
             StringBuilder sb = new StringBuilder();
 
-            GTKObjectRepresentation obj = _rules.ObjectType
-                                                .First(o=>string.Compare(node.NodeName, o.TypeName) == 0);
+            GTKObjectRepresentation obj = GetTypeRepresentation(node.NodeName);
 
             string objName = string.Empty;
             if(!_counters.ContainsKey(obj.TypeName))
@@ -63,30 +62,75 @@ namespace GMLParser.Model
                 _counters[obj.TypeName]++;
             }
 
+            node.CodeName = objName;
             _elementsToShow.Push(objName);
 
             sb.AppendLine(string.Format(obj.CreationString, objName));
 
             foreach(var attr in node.ObjectProperties)
             {
-                string setter = FindSetter(obj, attr.Key);
+                string setter = FindProperty(obj, attr.Key).SetterRepresentation;
 
                 sb.AppendLine($"{objName}->{string.Format(setter, objName, attr.Value)}");
+            }
+
+            if(parent != null)
+            {
+                if(IsContainer(parent))
+                {
+                    Property add = FindProperty(parent, "_Add");
+
+                    if(!node.AttachedProperties.All(p => string.Equals(p.Key.Split(':').First(), parent.NodeName)))
+                    {
+                        throw new Exception("Wrong parent type");
+                    }
+
+                    var packArgs = add.GetterRepresentation
+                                       .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                                       .Select(par => par.Trim())
+                                       .Skip(2);
+
+                    List<string> values = new List<string>(packArgs.Count());
+
+                    foreach(string prop in packArgs)
+                    {
+                        values.Add(node.AttachedProperties[$"{parent.NodeName}:{prop}"]);
+                    }
+
+                    if(packArgs.Count() > 0)
+                    {
+                        sb.AppendFormat(add.SetterRepresentation, parent.CodeName, node.CodeName, values[0], values[1], values[2]);
+                    }
+                    else
+                    {
+                        sb.AppendFormat(add.SetterRepresentation, parent.CodeName);
+                    }
+                }
+                else
+                {
+                    throw new Exception("Attempt to put children in non container element");
+                }
             }
 
             return sb.ToString();
         }
 
-        private string FindSetter(GTKObjectRepresentation obj, string propName)
+        private Property FindProperty(Node node, string propName)
         {
-            string toRet = null;
+            GTKObjectRepresentation obj = GetTypeRepresentation(node.NodeName);
+
+            return FindProperty(obj, propName);
+        }
+        private Property FindProperty(GTKObjectRepresentation obj, string propName)
+        {
+            Property toRet = null;
 
             GTKObjectRepresentation curr = obj;
             while(curr != null)
             {
                 if(curr.ObjectProperties.Any(p=>string.Compare(p.Name, propName) == 0))
                 {
-                    toRet = curr.ObjectProperties.First(p=>string.Compare(p.Name, propName) == 0).SetterRepresentation;
+                    toRet = curr.ObjectProperties.First(p=>string.Compare(p.Name, propName) == 0);
                     break;
                 }
                 else
@@ -101,6 +145,30 @@ namespace GMLParser.Model
             }
 
             return toRet;
+        }
+
+        private bool IsContainer(Node node)
+        {
+            bool toRet = false;
+            
+            string type = node.NodeName;
+            while(!string.IsNullOrEmpty(type))
+            {
+                GTKObjectRepresentation obj = GetTypeRepresentation(type);
+
+                if(obj.ObjectProperties.Any(p => string.Equals(p.Name, "_Add")))
+                    return true;
+                else
+                    type = obj.BaseType;
+            }
+
+            return toRet;
+        }        
+
+        private GTKObjectRepresentation GetTypeRepresentation(string typeName)
+        {
+            return _rules.ObjectType
+                         .First(o=>string.Compare(typeName, o.TypeName) == 0);  
         }
 
         private string ShowVisualElements()

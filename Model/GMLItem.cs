@@ -9,6 +9,7 @@ namespace GMLParser.Model
     public class Node
     {
         public string NodeName { get; private set; }
+        public string CodeName { get; set; }
         public Dictionary<string, string> ObjectProperties { get; } 
                                         = new Dictionary<string, string>();
         
