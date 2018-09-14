@@ -72,7 +72,7 @@
 <BaseType>GtkBin</BaseType>
 <ObjectProperties>
 <Property>
-<Setter> = gtk_window_new ({1});</Setter>
+<Setter> = GTK_WINDOW(gtk_window_new ({1}));</Setter>
 <Getter>WindowType</Getter>
 <PropName>_Creation</PropName>
 </Property>
@@ -178,6 +178,107 @@
 <Setter> = gtk_vbox_new ({1}, {2});</Setter>
 <Getter>Homogeneous, Spacing</Getter>
 <PropName>_Creation</PropName>
+</Property>
+</ObjectProperties>
+</GTKObjectRepresentation>
+<GTKObjectRepresentation>
+<TypeName>GtkHBox</TypeName>
+<BaseType>GtkBox</BaseType>
+<ObjectProperties>
+<Property>
+<Setter> = gtk_hbox_new ({1}, {2});</Setter>
+<Getter>Homogeneous, Spacing</Getter>
+<PropName>_Creation</PropName>
+</Property>
+</ObjectProperties>
+</GTKObjectRepresentation>
+<GTKObjectRepresentation>
+<TypeName>GtkFixed</TypeName>
+<BaseType>GtkContainer</BaseType>
+<ObjectProperties>
+<Property>
+<Setter> = gtk_fixed_new (void);</Setter>
+<Getter></Getter>
+<PropName>_Creation</PropName>
+</Property>
+<Property>
+<Setter> = gtk_fixed_put (GTK_FIXED({0}), GTK_WIDGET{1}, {2}, {3});</Setter>
+<Getter>Fixed, Widget, X, Y</Getter>
+<PropName>_Add</PropName>
+</Property>
+</ObjectProperties>
+</GTKObjectRepresentation>
+<GTKObjectRepresentation>
+<TypeName>GtkPaned</TypeName>
+<BaseType>GtkContainer</BaseType>
+<ObjectProperties>
+<Property>
+<Setter> = gtk_paned_pack{4} (GTK_PANED({0}), GTK_WIDGET{1}, {2}, {3});</Setter>
+<Getter>Paned, Widget, Resize, Shrink, Child</Getter>
+<PropName>_Add</PropName>
+</Property>
+</ObjectProperties>
+</GTKObjectRepresentation>
+<GTKObjectRepresentation>
+<TypeName>GtkHPaned</TypeName>
+<BaseType>GtkPaned</BaseType>
+<ObjectProperties>
+<Property>
+<Setter> = gtk_hpaned_new (void);</Setter>
+<Getter></Getter>
+<PropName>_Creation</PropName>
+</Property>
+</ObjectProperties>
+</GTKObjectRepresentation>
+<GTKObjectRepresentation>
+<TypeName>GtkVPaned</TypeName>
+<BaseType>GtkPaned</BaseType>
+<ObjectProperties>
+<Property>
+<Setter> = gtk_vpaned_new (void);</Setter>
+<Getter></Getter>
+<PropName>_Creation</PropName>
+</Property>
+</ObjectProperties>
+</GTKObjectRepresentation>
+<GTKObjectRepresentation>
+<TypeName>GtkTreeView</TypeName>
+<BaseType>GtkContainer</BaseType>
+<ObjectProperties>
+<Property>
+<Setter> = gtk_tree_view_new (void);</Setter>
+<Getter></Getter>
+<PropName>_Creation</PropName>
+</Property>
+<Property>
+<Setter>gtk_tree_view_set_level_indentation (GTK_TREE_VIEW({0}), {1});</Setter>
+<Getter>gtk_tree_view_get_level_indentation (GTK_TREE_VIEW({0}))</Getter>
+<PropName>LevelIndentation</PropName>
+</Property>
+<Property>
+<Setter>gtk_tree_view_set_show_expanders (GTK_TREE_VIEW({0}), {1});</Setter>
+<Getter>gtk_tree_view_get_show_expanders (GTK_TREE_VIEW({0}))</Getter>
+<PropName>ShowExpanders</PropName>
+</Property>
+<Property>
+<Setter>gtk_tree_view_set_model (GTK_TREE_VIEW({0}), {1});</Setter>
+<Getter>gtk_tree_view_get_model (GTK_TREE_VIEW({0}))</Getter>
+<PropName>Model</PropName>
+</Property>
+<Property>
+<Setter>gtk_tree_view_set_hadjustment (GTK_TREE_VIEW({0}), {1});</Setter>
+<Getter>gtk_tree_view_get_hadjustment (GTK_TREE_VIEW({0}))</Getter>
+<PropName>HAdjustment</PropName>
+</Property>
+<Property>
+<Setter>gtk_tree_view_set_vadjustment (GTK_TREE_VIEW({0}), {1});</Setter>
+<Getter>gtk_tree_view_get_vadjustment (GTK_TREE_VIEW({0}))</Getter>
+<PropName>VAdjustment</PropName>
+</Property>
+<Property>
+<Setter>gtk_tree_view_set_headers_visible (GTK_TREE_VIEW({0}), {1});</Setter>
+<Getter>gtk_tree_view_get_headers_visible (GTK_TREE_VIEW({0}))</Getter>
+<PropName>IsHeadersVisible</PropName>
 </Property>
 </ObjectProperties>
 </GTKObjectRepresentation>

@@ -179,7 +179,7 @@ namespace GMLParser.Model
 
             while(_elementsToShow.Count > 0)
             {
-                sb.AppendLine($"gtk_widget_show({_elementsToShow.Pop()});");
+                sb.AppendLine($"gtk_widget_show(GTK_WIDGET({_elementsToShow.Pop()}));");
             }
 
             return sb.ToString();
