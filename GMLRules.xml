@@ -280,6 +280,107 @@
 <Getter>gtk_tree_view_get_headers_visible (GTK_TREE_VIEW({0}))</Getter>
 <PropName>IsHeadersVisible</PropName>
 </Property>
+<Property>
+<Setter>gtk_tree_view_set_headers_clickable (GTK_TREE_VIEW({0}), {1});</Setter>
+<Getter>gtk_tree_view_get_headers_clickable (GTK_TREE_VIEW({0}))</Getter>
+<PropName>IsHeadersClickable</PropName>
+</Property>
+<Property>
+<Setter>gtk_tree_view_set_rules_hint (GTK_TREE_VIEW({0}), {1});</Setter>
+<Getter>gtk_tree_view_get_rules_hint (GTK_TREE_VIEW({0}))</Getter>
+<PropName>UseRulesHint</PropName>
+</Property>
+<Property>
+<Setter>gtk_tree_view_set_reorderable (GTK_TREE_VIEW({0}), {1});</Setter>
+<Getter>gtk_tree_view_get_reorderable (GTK_TREE_VIEW({0}))</Getter>
+<PropName>IsReordable</PropName>
+</Property>
+<Property>
+<Setter>gtk_tree_view_set_fixed_height_mode (GTK_TREE_VIEW({0}), {1});</Setter>
+<Getter>gtk_tree_view_get_fixed_height_mode (GTK_TREE_VIEW({0}))</Getter>
+<PropName>IsFixedHeigthMode</PropName>
+</Property>
+<Property>
+<Setter>gtk_tree_view_set_hover_selection (GTK_TREE_VIEW({0}), {1});</Setter>
+<Getter>gtk_tree_view_get_hover_selection (GTK_TREE_VIEW({0}))</Getter>
+<PropName>IsHoverSelection</PropName>
+</Property>
+<Property>
+<Setter>gtk_tree_view_set_hover_expand (GTK_TREE_VIEW({0}), {1});</Setter>
+<Getter>gtk_tree_view_get_hover_expand (GTK_TREE_VIEW({0}))</Getter>
+<PropName>IsHoverExpand</PropName>
+</Property>
+</ObjectProperties>
+</GTKObjectRepresentation>
+<GTKObjectRepresentation>
+<TypeName>GtkTreeView</TypeName>
+<BaseType>GtkContainer</BaseType>
+<ObjectProperties>
+<Property>
+<Setter> = gtk_text_view_new (void);</Setter>
+<Getter></Getter>
+<PropName>_Creation</PropName>
+</Property>
+<Property>
+<Setter>gtk_text_view_set_wrap_mode (GTK_TEXT_VIEW({0}, {1}));</Setter>
+<Getter>gtk_text_view_get_wrap_mode (GTK_TEXT_VIEW({0};</Getter>
+<PropName>WrapMode</PropName>
+</Property>
+<Property>
+<Setter>gtk_text_view_set_editable (GTK_TEXT_VIEW({0}, {1}));</Setter>
+<Getter>gtk_text_view_get_editable (GTK_TEXT_VIEW({0});</Getter>
+<PropName>IsEditable</PropName>
+</Property>
+<Property>
+<Setter>gtk_text_view_set_cursor_visible (GTK_TEXT_VIEW({0}, {1}));</Setter>
+<Getter>gtk_text_view_get_cursor_visible (GTK_TEXT_VIEW({0});</Getter>
+<PropName>IsCursorVisible</PropName>
+</Property>
+<Property>
+<Setter>gtk_text_view_set_overwrite (GTK_TEXT_VIEW({0}, {1}));</Setter>
+<Getter>gtk_text_view_get_overwrite (GTK_TEXT_VIEW({0});</Getter>
+<PropName>Override</PropName>
+</Property>
+<Property>
+<Setter>gtk_text_view_set_pixels_above_lines (GTK_TEXT_VIEW({0}, {1}));</Setter>
+<Getter>gtk_text_view_get_pixels_above_lines (GTK_TEXT_VIEW({0});</Getter>
+<PropName>PixelsAboutLines</PropName>
+</Property>
+<Property>
+<Setter>gtk_text_view_set_pixels_below_lines (GTK_TEXT_VIEW({0}, {1}));</Setter>
+<Getter>gtk_text_view_get_pixels_below_lines (GTK_TEXT_VIEW({0});</Getter>
+<PropName>PixelsBelowLines</PropName>
+</Property>
+<Property>
+<Setter>gtk_text_view_set_pixels_inside_wrap (GTK_TEXT_VIEW({0}, {1}));</Setter>
+<Getter>gtk_text_view_get_pixels_inside_wrap (GTK_TEXT_VIEW({0});</Getter>
+<PropName>PixelsInsideWrap</PropName>
+</Property>
+<Property>
+<Setter>gtk_text_view_set_justification (GTK_TEXT_VIEW({0}, {1}));</Setter>
+<Getter>gtk_text_view_get_justification (GTK_TEXT_VIEW({0});</Getter>
+<PropName>Justification</PropName>
+</Property>
+<Property>
+<Setter>gtk_text_view_set_left_margin (GTK_TEXT_VIEW({0}, {1}));</Setter>
+<Getter>gtk_text_view_get_left_margin (GTK_TEXT_VIEW({0});</Getter>
+<PropName>LeftMargin</PropName>
+</Property>
+<Property>
+<Setter>gtk_text_view_set_right_margin (GTK_TEXT_VIEW({0}, {1}));</Setter>
+<Getter>gtk_text_view_get_right_margin (GTK_TEXT_VIEW({0});</Getter>
+<PropName>RightMargin</PropName>
+</Property>
+<Property>
+<Setter>gtk_text_view_set_indent (GTK_TEXT_VIEW({0}, {1}));</Setter>
+<Getter>gtk_text_view_get_indent (GTK_TEXT_VIEW({0});</Getter>
+<PropName>Indent</PropName>
+</Property>
+<Property>
+<Setter>gtk_text_view_set_accepts_tab (GTK_TEXT_VIEW({0}, {1}));</Setter>
+<Getter>gtk_text_view_get_accepts_tab (GTK_TEXT_VIEW({0});</Getter>
+<PropName>IsTabAccepted</PropName>
+</Property>
 </ObjectProperties>
 </GTKObjectRepresentation>
 </Objects>
