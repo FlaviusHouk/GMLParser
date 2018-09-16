@@ -9,19 +9,25 @@ namespace GMLParser.Model
     {
         private GMLRules _rules;
         private Stack<string> _elementsToShow;
+        private List<string> _named;
+        public List<string> Functions { get; } = new List<string>();
+        public string Named { get; private set; } 
         private Dictionary<string, int> _counters;
         public GMLCodeGenerator()
         {
             _rules = GMLRules.GetRules();
             _counters = new Dictionary<string, int>();
             _elementsToShow = new Stack<string>();
+            _named = new List<string>(); 
         }
 
         public string GenerateCode(Node root)
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(GenerateCodePrivate(root));
+            string code = GenerateCodePrivate(root);
+            Named = CreateGetFunctions();
+            sb.Append(code);
 
             _counters.Clear();
 
@@ -73,6 +79,13 @@ namespace GMLParser.Model
                 string setter = FindProperty(obj, attr.Key).SetterRepresentation;
 
                 sb.AppendLine($"{string.Format(setter, objName, attr.Value)}");
+            }
+
+            var name = node.ObjectProperties.FirstOrDefault(p=>string.Equals(p.Key,"Name"));
+            if(!string.IsNullOrEmpty(name.Value))
+            {
+                sb.Append($"{name.Value} = GTK_WIDGET({node.CodeName});\n");
+                _named.Add(name.Value);
             }
 
             if(parent != null)
@@ -203,6 +216,30 @@ namespace GMLParser.Model
             }
 
             return string.Format(obj.CreationString, values.ToArray());
+        }
+
+        private string CreateGetFunctions()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach(string obj in _named)
+            {
+                sb.Append($"static GtkWidget* {obj};\n");
+            }
+
+            foreach(string obj in _named)
+            {
+                Functions.Add($"GtkWidget* Get_{obj} (void);");
+                StringBuilder func = new StringBuilder();
+                func.Append("GtkWidget* Get_");
+                func.Append(obj);
+                func.Append(" (void) { return ");
+                func.Append(obj);
+                func.Append("; }\n");
+                sb.Append(func.ToString());
+            }
+
+            return sb.ToString();
         }
     }
 }

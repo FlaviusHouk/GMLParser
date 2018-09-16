@@ -18,7 +18,12 @@ namespace GMLParser.Model
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine("#include <stdio.h>\n");
-            sb.Append($"void Build{name}(void);");
+            sb.Append($"void Build{name}(void);\n");
+
+            foreach(string func in _generator.Functions)
+            {
+                sb.Append($"{func}\n");
+            }
 
             return sb.ToString();
         }
@@ -41,12 +46,15 @@ namespace GMLParser.Model
 
             sb.Append(GetBaseIncludes(fileName));
 
+            Node root = BuildNodeTree(code);
+            string generated = _generator.GenerateCode(root);
+
+            sb.AppendFormat("{0}\n\n", _generator.Named);
+
             sb.Append($"void Build{fileName}");
             sb.Append("(void)\n{\n");
-
-            Node root = BuildNodeTree(code);
-
-            sb.Append(_generator.GenerateCode(root));
+            
+            sb.Append(generated);
 
             sb.Append("\n}");
 
