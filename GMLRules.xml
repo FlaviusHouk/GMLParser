@@ -383,5 +383,113 @@
 </Property>
 </ObjectProperties>
 </GTKObjectRepresentation>
+<GTKObjectRepresentation>
+<TypeName>GtkMisc</TypeName>
+<BaseType>GtkWidget</BaseType>
+<ObjectProperties>
+<Property>
+<Setter>gtk_misc_set_alignment (GTK_MISC({0}), {1});</Setter>
+<Getter></Getter>
+<PropName>Alignment</PropName>
+</Property>
+<Property>
+<Setter>gtk_misc_set_padding (GTK_MISC({0}), {1});</Setter>
+<Getter></Getter>
+<PropName>Padding</PropName>
+</Property>
+</ObjectProperties>
+</GTKObjectRepresentation>
+<GTKObjectRepresentation>
+<TypeName>GtkImage</TypeName>
+<BaseType>GtkMisc</BaseType>
+<ObjectProperties>
+<Property>
+<Setter> = gtk_image_new (void);</Setter>
+<Getter></Getter>
+<PropName>_Creation</PropName>
+</Property>
+</ObjectProperties>
+</GTKObjectRepresentation>
+<GTKObjectRepresentation>
+<TypeName>GtkLabel</TypeName>
+<BaseType>GtkMisc</BaseType>
+<ObjectProperties>
+<Property>
+<Setter> = gtk_label_new (NULL);</Setter>
+<Getter></Getter>
+<PropName>_Creation</PropName>
+</Property>
+<Property>
+<Setter>gtk_label_set_text(GTK_LABEL({0}), "{1}");</Setter>
+<Getter>gtk_label_get_text (GTK_LABEL({0}));</Getter>
+<PropName>Text</PropName>
+</Property>
+<Property>
+<Setter>gtk_label_set_markup(GTK_LABEL({0}), "{1}");</Setter>
+<Getter></Getter>
+<PropName>Markup</PropName>
+</Property>
+<Property>
+<Setter>gtk_label_set_pattern(GTK_LABEL({0}), "{1}");</Setter>
+<Getter></Getter>
+<PropName>Pattern</PropName>
+</Property>
+<Property>
+<Setter>gtk_label_set_justify(GTK_LABEL({0}), {1});</Setter>
+<Getter>gtk_label_get_justify (GTK_LABEL({0}));</Getter>
+<PropName>Justification</PropName>
+</Property>
+<Property>
+<Setter>gtk_label_set_ellipsize(GTK_LABEL({0}), {1});</Setter>
+<Getter>gtk_label_get_ellipsize(GTK_LABEL({0}));</Getter>
+<PropName>Ellipsize</PropName>
+</Property>
+<Property>
+<Setter>gtk_label_set_width_chars(GTK_LABEL({0}), {1});</Setter>
+<Getter>gtk_label_get_width_chars(GTK_LABEL({0}));</Getter>
+<PropName>WidthChars</PropName>
+</Property>
+<Property>
+<Setter>gtk_label_set_max_width_chars(GTK_LABEL({0}), {1});</Setter>
+<Getter>gtk_label_get_max_width_chars(GTK_LABEL({0}));</Getter>
+<PropName>MaxWidthChars</PropName>
+</Property>
+<Property>
+<Setter>gtk_label_set_line_wrap(GTK_LABEL({0}), {1});</Setter>
+<Getter>gtk_label_get_line_wrap(GTK_LABEL({0}));</Getter>
+<PropName>Wrap</PropName>
+</Property>
+<Property>
+<Setter>gtk_label_set_line_wrap_mode(GTK_LABEL({0}), {1});</Setter>
+<Getter>gtk_label_get_line_wrap_mode(GTK_LABEL({0}));</Getter>
+<PropName>WrapMode</PropName>
+</Property>
+<Property>
+<Setter>gtk_label_set_selectable(GTK_LABEL({0}), {1});</Setter>
+<Getter></Getter>
+<PropName>IsSelectable</PropName>
+</Property>
+<Property>
+<Setter>gtk_label_set_use_underline(GTK_LABEL({0}), {1});</Setter>
+<Getter>gtk_label_get_use_underline(GTK_LABEL({0}));</Getter>
+<PropName>UseUnderline</PropName>
+</Property>
+<Property>
+<Setter>gtk_label_set_single_line_mode(GTK_LABEL({0}), {1});</Setter>
+<Getter>gtk_label_get_single_line_mode(GTK_LABEL({0}));</Getter>
+<PropName>SingleLineMode</PropName>
+</Property>
+<Property>
+<Setter>gtk_label_set_angle(GTK_LABEL({0}), {1});</Setter>
+<Getter>gtk_label_get_angle(GTK_LABEL({0}));</Getter>
+<PropName>Angle</PropName>
+</Property>
+<Property>
+<Setter>gtk_label_set_track_visited_links(GTK_LABEL({0}), {1});</Setter>
+<Getter>gtk_label_get_track_visited_links(GTK_LABEL({0}));</Getter>
+<PropName>TrackVisitedLinks</PropName>
+</Property>
+</ObjectProperties>
+</GTKObjectRepresentation>
 </Objects>
 </GMLRules>
